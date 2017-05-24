@@ -1,7 +1,7 @@
 # Личный проект «Угадай мелодию» [![Build status][travis-image]][travis-url]
 
 * Студент: [Татьяна Лебедева](https://up.htmlacademy.ru/ecmascript/2/user/107333).
-* Наставник: `Неизвестно`.
+* Наставник: [Иван Стрелков](https://htmlacademy.ru/profile/id427611).
 
 ---
 
