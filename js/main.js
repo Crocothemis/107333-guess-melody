@@ -1,4 +1,4 @@
-document.addEventListener(`DOMContentLoaded`, function () {
+document.addEventListener(`DOMContentLoaded`, () => {
 
   const sectionMain = document.querySelector(`.main`);
   const templates = document.querySelector(`#templates`);
