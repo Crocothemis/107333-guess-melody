@@ -20,9 +20,7 @@ document.addEventListener(`DOMContentLoaded`, function () {
 
   showScreen(currentScreen);
 
-  function switchScreens(e) {
-    e = e || window.event;
-
+  const switchScreens = (e) => {
     if (e.altKey) {
 
       if (event.keyCode === 37) {
@@ -33,8 +31,7 @@ document.addEventListener(`DOMContentLoaded`, function () {
         showScreen(currentScreen + 1);
       }
     }
-
-  }
+  };
 
   document.addEventListener(`keyup`, switchScreens);
 
