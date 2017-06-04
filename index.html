@@ -29,7 +29,7 @@
 
 <template id="templates">
   <!-- Игра на выбор жанра -->
-  <section class="main main--level main--level-genre">
+  <section class="main main--level main--level-genre" id="level-genre">
     <h2 class="title">Выберите инди-рок треки</h2>
     <form class="genre">
       <div class="genre-answer">
@@ -70,7 +70,7 @@
   </div>
 
   <!-- Неудачный результат игры -->
-  <section class="main main--result">
+  <section class="main main--result" id="result-fail">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
 
     <h2 class="title">Вы проиграли</h2>
@@ -79,7 +79,7 @@
   </section>
 
   <!-- Результат игры -->
-  <section class="main main--result">
+  <section class="main main--result" id="result-success">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
 
     <h2 class="title">Вы настоящий меломан!</h2>
@@ -89,7 +89,7 @@
   </section>
 
   <!-- Выбор исполнителя: уровень -->
-  <section class="main main--level main--level-artist">
+  <section class="main main--level main--level-artist" id="level-artist">
     <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
       <circle
         cx="390" cy="390" r="370"
@@ -137,7 +137,7 @@
   </section>
 
   <!-- Приветствие -->
-  <section class="main main--welcome">
+  <section class="main main--welcome" id="welcome">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
     <button class="main-play">Начать игру</button>
     <h2 class="title main-title">Правила игры</h2>
