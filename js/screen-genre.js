@@ -30,7 +30,7 @@ const templateGenre = `<section class="main main--level main--level-genre" id="l
         <label class="genre-answer-check" for="a-4"></label>
       </div>
 
-      <button class="genre-answer-send" type="submit">Ответить</button>
+      <button class="genre-answer-send" type="submit" disabled="disabled">Ответить</button>
     </form>
   </section>`;
 
@@ -38,47 +38,36 @@ export const showScreenGenre = () => {
 
   showScreen(getElFromTempl(templateGenre));
 
-  document.addEventListener(`click`, (e) => {
+  const formGenre = document.querySelector(`.genre`);
+  const answers = document.querySelectorAll(`input[name="answer"]`);
+  const submitBtn = document.querySelector(`.genre-answer-send`);
 
-    if (e.target.closest(`.genre-answer-send`)) {
-
-      e.preventDefault();
-
-      let answers = document.querySelectorAll(`input[name="answer"]`);
-
-      const isAnswer = (arr) => {
-
-        let m = arr.length;
-
-        while (m--) {
-
-          if (arr[m].checked) {
-
-            return true;
-
-          }
-
-        }
-
-        return false;
-
-      };
-
-      if (isAnswer(answers)) {
-
-        const randomFunc = (...functions) => {
-
-          return functions[Math.floor(Math.random() * functions.length)];
-
-        };
-
-        randomFunc(showResultSuccess, showResultFail)();
-
+  const isAnswer = (arr) => {
+    let m = arr.length;
+    while (m--) {
+      if (arr[m].checked) {
+        return true;
       }
-
     }
+    return false;
+  };
 
+  formGenre.addEventListener(`change`, () => {
+    if (isAnswer(answers)) {
+      submitBtn.removeAttribute(`disabled`);
+    } else {
+      submitBtn.setAttribute(`disabled`, `disabled`);
+    }
   });
+
+  formGenre.addEventListener(`submit`, (e) => {
+    e.preventDefault();
+    randomFunc(showResultSuccess, showResultFail)();
+  });
+
+  const randomFunc = (...functions) => {
+    return functions[Math.floor(Math.random() * functions.length)];
+  };
 
 };
 

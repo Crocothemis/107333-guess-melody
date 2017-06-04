@@ -52,7 +52,7 @@ const templateArtist = `<section class="main main--level main--level-artist" id=
 export const showScreenArtist = () => {
   showScreen(getElFromTempl(templateArtist));
 
-  document.addEventListener(`click`, (e) => {
+  document.querySelector(`.main-list`).addEventListener(`click`, (e) => {
 
     if (e.target.closest(`.main-answer-wrapper`)) {
       showScreenGenre();
