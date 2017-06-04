@@ -1,5 +1,5 @@
-import getElFromTempl from "./get-el-from-tmpl";
-import showScreen from "./show-screen";
+import getElFromTempl from "../get-el-from-tmpl";
+import showScreen from "../show-screen";
 import showScreenGenre from "./screen-genre";
 
 const templateArtist = `<section class="main main--level main--level-artist" id="level-artist">

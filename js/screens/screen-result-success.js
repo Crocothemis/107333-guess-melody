@@ -1,5 +1,5 @@
-import getElFromTempl from "./get-el-from-tmpl";
-import showScreen from "./show-screen";
+import getElFromTempl from "../get-el-from-tmpl";
+import showScreen from "../show-screen";
 import showScreenWelcome from "./screen-welcome";
 
 const templateSuccess = `<section class="main main--result" id="result-success">

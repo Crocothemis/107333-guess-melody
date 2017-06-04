@@ -1,5 +1,5 @@
-import getElFromTempl from "./get-el-from-tmpl";
-import showScreen from "./show-screen";
+import getElFromTempl from "../get-el-from-tmpl";
+import showScreen from "../show-screen";
 import showResultSuccess from "./screen-result-success";
 import showResultFail from "./screen-result-fail";
 
