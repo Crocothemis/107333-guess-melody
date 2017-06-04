@@ -14,9 +14,10 @@ const templateWelcome = `<section class="main main--welcome" id="welcome">
   </section>`;
 
 export const showScreenWelcome = () => {
-  showScreen(getElFromTempl(templateWelcome));
+  const welcomeScreen = getElFromTempl(templateWelcome);
 
-  document.querySelector(`.main-play`).addEventListener(`click`, showScreenArtist);
+  welcomeScreen.querySelector(`.main-play`).addEventListener(`click`, showScreenArtist);
+  showScreen(welcomeScreen);
 };
 
 export default showScreenWelcome;
