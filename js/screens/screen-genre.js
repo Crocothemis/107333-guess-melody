@@ -39,21 +39,15 @@ export const showScreenGenre = () => {
   showScreen(getElFromTempl(templateGenre));
 
   const formGenre = document.querySelector(`.genre`);
-  const answers = document.querySelectorAll(`input[name="answer"]`);
+  const answers = Array.prototype.slice.call(document.querySelectorAll(`input[name="answer"]`));
   const submitBtn = document.querySelector(`.genre-answer-send`);
 
-  const isAnswer = (arr) => {
-    let m = arr.length;
-    while (m--) {
-      if (arr[m].checked) {
-        return true;
-      }
-    }
-    return false;
+  const isAnswer = () => {
+    answers.some((el) => el.checked);
   };
 
   formGenre.addEventListener(`change`, () => {
-    if (isAnswer(answers)) {
+    if (isAnswer) {
       submitBtn.removeAttribute(`disabled`);
     } else {
       submitBtn.setAttribute(`disabled`, `disabled`);
