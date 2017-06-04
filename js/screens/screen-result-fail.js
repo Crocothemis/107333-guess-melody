@@ -2,7 +2,7 @@ import getElFromTempl from "../get-el-from-tmpl";
 import showScreen from "../show-screen";
 import showScreenWelcome from "./screen-welcome";
 
-const templateFail =`<section class="main main--result" id="result-fail">
+const templateFail = `<section class="main main--result" id="result-fail">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
 
     <h2 class="title">Вы проиграли</h2>
