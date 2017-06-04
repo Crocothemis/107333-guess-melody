@@ -11,15 +11,12 @@ const templateSuccess = `<section class="main main--result" id="result-success">
   </section>`;
 
 const showResultSuccess = () => {
+  const screenResultSuccess = getElFromTempl(templateSuccess);
 
-  showScreen(getElFromTempl(templateSuccess));
-
-  document.querySelector(`.main-replay`).addEventListener(`click`, () => {
-
+  screenResultSuccess.querySelector(`.main-replay`).addEventListener(`click`, () => {
     showScreenWelcome();
-
   });
-
+  showScreen(screenResultSuccess);
 };
 
 export default showResultSuccess;

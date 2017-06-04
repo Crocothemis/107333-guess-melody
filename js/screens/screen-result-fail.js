@@ -11,15 +11,12 @@ const templateFail = `<section class="main main--result" id="result-fail">
   </section>`;
 
 const showResultFail = () => {
+  const screenResultFail = getElFromTempl(templateFail);
 
-  showScreen(getElFromTempl(templateFail));
-
-  document.querySelector(`.main-replay`).addEventListener(`click`, () => {
-
+  screenResultFail.querySelector(`.main-replay`).addEventListener(`click`, () => {
     showScreenWelcome();
-
   });
-
+  showScreen(screenResultFail);
 };
 
 export default showResultFail;

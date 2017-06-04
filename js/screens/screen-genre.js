@@ -35,19 +35,17 @@ const templateGenre = `<section class="main main--level main--level-genre" id="l
   </section>`;
 
 export const showScreenGenre = () => {
-
-  showScreen(getElFromTempl(templateGenre));
-
-  const formGenre = document.querySelector(`.genre`);
-  const answers = Array.prototype.slice.call(document.querySelectorAll(`input[name="answer"]`));
-  const submitBtn = document.querySelector(`.genre-answer-send`);
+  const screenGenre = getElFromTempl(templateGenre);
+  const formGenre = screenGenre.querySelector(`.genre`);
+  const answers = Array.prototype.slice.call(screenGenre.querySelectorAll(`input[name="answer"]`));
+  const submitBtn = screenGenre.querySelector(`.genre-answer-send`);
 
   const isAnswer = () => {
-    answers.some((el) => el.checked);
+    return answers.some((el) => el.checked);
   };
 
   formGenre.addEventListener(`change`, () => {
-    if (isAnswer) {
+    if (isAnswer()) {
       submitBtn.removeAttribute(`disabled`);
     } else {
       submitBtn.setAttribute(`disabled`, `disabled`);
@@ -63,6 +61,7 @@ export const showScreenGenre = () => {
     return functions[Math.floor(Math.random() * functions.length)];
   };
 
+  showScreen(screenGenre);
 };
 
 export default showScreenGenre;

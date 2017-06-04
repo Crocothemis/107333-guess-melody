@@ -50,16 +50,14 @@ const templateArtist = `<section class="main main--level main--level-artist" id=
   </section>`;
 
 export const showScreenArtist = () => {
-  showScreen(getElFromTempl(templateArtist));
+  const screenArtist = getElFromTempl(templateArtist);
 
-  document.querySelector(`.main-list`).addEventListener(`click`, (e) => {
-
+  screenArtist.querySelector(`.main-list`).addEventListener(`click`, (e) => {
     if (e.target.closest(`.main-answer-wrapper`)) {
       showScreenGenre();
     }
-
   });
-
+  showScreen(screenArtist);
 };
 
 export default showScreenArtist;
