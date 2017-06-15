@@ -28,24 +28,24 @@ const templateArtist = (data) => `<section class="main main--level main--level-a
         <div class="main-answer-wrapper">
           <input class="main-answer-r" type="radio" id="answer-1" name="answer" value="val-1" />
           <label class="main-answer" for="answer-1">
-            <img class="main-answer-preview" src="">
-            Пелагея
+            <img class="main-answer-preview" src="${data.answer1.img}">
+            ${data.answer1.name}
           </label>
         </div>
 
         <div class="main-answer-wrapper">
           <input class="main-answer-r" type="radio" id="answer-2" name="answer" value="val-1" />
           <label class="main-answer" for="answer-2">
-            <img class="main-answer-preview" src="">
-            Краснознаменная дивизия имени моей бабушки
+            <img class="main-answer-preview" src="${data.answer2.img}">
+            ${data.answer2.name}
           </label>
         </div>
 
         <div class="main-answer-wrapper">
           <input class="main-answer-r" type="radio" id="answer-2" name="answer" value="val-1" />
           <label class="main-answer" for="answer-2">
-            <img class="main-answer-preview" src="">
-            Lorde
+            <img class="main-answer-preview" src="${data.answer3.img}">
+            ${data.answer3.name}
           </label>
         </div>
       </form>
@@ -69,7 +69,6 @@ export const showScreenArtist = () => {
   initializePlayer(screenArtist.querySelector(`.player-wrapper`), data.url);
   showScreen(screenArtist);
   artistCount++;
-  console.log(artistCount);
 
 };
 

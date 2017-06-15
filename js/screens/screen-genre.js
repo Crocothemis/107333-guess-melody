@@ -2,40 +2,37 @@ import getElFromTempl from "../get-el-from-tmpl";
 import showScreen from "../show-screen";
 import showResultSuccess from "./screen-result-success";
 import showResultFail from "./screen-result-fail";
+import genres from '../data/genres';
+import {initializePlayer} from '../player';
+import initialState from '../data/initial-data';
 
-const templateGenre = `<section class="main main--level main--level-genre" id="level-genre">
-    <h2 class="title">Выберите инди-рок треки</h2>
+const templateGenre = (data) => `<section class="main main--level main--level-genre" id="level-genre">
+    <h2 class="title">Выберите  ${data.title} треки</h2>
     <form class="genre">
-      <div class="genre-answer">
+  
+  ${[...Object.entries(data.songs)].map(([song]) =>
+  ` <div class="genre-answer">
         <div class="player-wrapper"></div>
-        <input type="checkbox" name="answer" value="answer-1" id="a-1">
-        <label class="genre-answer-check" for="a-1"></label>
-      </div>
-
-      <div class="genre-answer">
-        <div class="player-wrapper"></div>
-        <input type="checkbox" name="answer" value="answer-1" id="a-2">
-        <label class="genre-answer-check" for="a-2"></label>
-      </div>
-
-      <div class="genre-answer">
-        <div class="player-wrapper"></div>
-        <input type="checkbox" name="answer" value="answer-1" id="a-3">
-        <label class="genre-answer-check" for="a-3"></label>
-      </div>
-
-      <div class="genre-answer">
-        <div class="player-wrapper"></div>
-        <input type="checkbox" name="answer" value="answer-1" id="a-4">
-        <label class="genre-answer-check" for="a-4"></label>
-      </div>
-
+        <input type="checkbox" name="answer" value="answer-${song}" id="a-${song}">
+        <label class="genre-answer-check" for="a-${song}"></label>
+      </div>`).join(``)}
+  
+  
+  
       <button class="genre-answer-send" type="submit" disabled="disabled">Ответить</button>
     </form>
   </section>`;
+let genreCount;
+
+if (typeof artistCount === `undefined`) {
+  genreCount = initialState.genreCount;
+}
+
+let data = genres[genreCount];
 
 export const showScreenGenre = () => {
-  const screenGenre = getElFromTempl(templateGenre);
+
+  const screenGenre = getElFromTempl(templateGenre(data));
   const formGenre = screenGenre.querySelector(`.genre`);
   const answers = Array.prototype.slice.call(screenGenre.querySelectorAll(`input[name="answer"]`));
   const submitBtn = screenGenre.querySelector(`.genre-answer-send`);
@@ -60,6 +57,10 @@ export const showScreenGenre = () => {
   const randomFunc = (...functions) => {
     return functions[Math.floor(Math.random() * functions.length)];
   };
+
+  for (let it = 0; it < screenGenre.querySelectorAll(`.player-wrapper`).length; it++) {
+    initializePlayer( screenGenre.querySelectorAll(`.player-wrapper`)[it], data.songs[it][`url`]);
+  }
 
   showScreen(screenGenre);
 };
