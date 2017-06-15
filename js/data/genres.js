@@ -1,46 +1,46 @@
 export default [
   {
-    "title": `инди-рок`,
-    "genre": `indie-rock`,
+    "title": `Эмбиент`,
+    "genre": `ambient`,
     "songs": [
       {
-        "url": `music/Of_Monsters_and_Men_Little_Talks.mp3`,
-        "genre": `indie-rock`
+        "url": `music/Strange_Stuff.mp3`,
+        "genre": `ambient`
       },
       {
-        "url": `music/Poets_of_the_Fall_Diamonds_For_Tears.mp3`,
-        "genre": `indie-rock`
+        "url": `music/Armchair_Stellar_Crossing.mp3`,
+        "genre": `ambient`
       },
       {
-        "url": `music/Nirvana_Smells_Like_Teen_Spirit.mp3`,
-        "genre": `grunge`
+        "url": `music/Lucky_Shot.mp3`,
+        "genre": `punk-rock`
       },
       {
-        "url": `music/Flaw_-_Whole.mp3`,
-        "genre": `alt-metal`
+        "url": `music/Takeoff.mp3`,
+        "genre": `rock`
       }
     ]
   },
   {
-    "title": `рок-н-ролл`,
-    "genre": `rock-n-roll`,
+    "title": `джаз`,
+    "genre": `jazz`,
     "songs": [
       {
-        "url": `music/The_Andrews_Sisters_Rum_And_Coca_Cola.mp3`,
-        "genre": `swing`
+        "url": `music/Lucky_Shot.mp3`,
+        "genre": `punk-rock`
       },
       {
-        "url": `music/The_Beatles_Twist_And_Shout.mp3`,
-        "genre": `rock-n-roll`
+        "url": `music/ChaCha_Fontanez.mp3`,
+        "genre": `jazz`
       },
       {
-        "url": `music/Roy_Orbison_All_I_Have_To_Do_Is_Dream.mp3`,
-        "genre": `rock-n-roll`
+        "url": `music/Jumpin_Boogie_Woogie.mp3`,
+        "genre": `jazz`
       },
       {
-        "url": `music/Carla_Bruni_Quelqu'un_m'a_dit.mp3`,
-        "genre": `chanson`
-      }
+        "url": `music/Open_Highway.mp3`,
+        "genre": `rock`
+      },
     ]
   },
   {
@@ -48,20 +48,20 @@ export default [
     "genre": `pop`,
     "songs": [
       {
-        "url": `music/Aura_Dione_Friends.mp3`,
+        "url": `music/Jack_in_the_Box.mp3`,
         "genre": `pop`
       },
       {
-        "url": `music/The_Coral_Dreaming_Of_You.mp3`,
-        "genre": `indie-rock`
+        "url": `music/Fur_Elise_by_Beethoven.mp3`,
+        "genre": `classic`
       },
       {
-        "url": `music/helena_paparizou_-_youre_my_number_one.mp3`,
+        "url": `music/Where_I_am_From.mp3`,
         "genre": `pop`
       },
       {
-        "url": `music/Marshmellow_Club_North_Bergin_Avenue.mp3`,
-        "genre": `indie-rock`
+        "url": `music/Open_Highway.mp3`,
+        "genre": `rock`
       }
     ]
   },
@@ -70,42 +70,42 @@ export default [
     "genre": `punk-rock`,
     "songs": [
       {
-        "url": `music/Marshmellow_Club_North_Bergin_Avenue.mp3`,
-        "genre": `indie-rock`
+        "url": `music/Open_Highway.mp3`,
+        "genre": `rock`
       },
       {
-        "url": `music/Flaw_-_Whole.mp3`,
-        "genre": `alt-metal`
+        "url": `music/Strange_Stuff.mp3`,
+        "genre": `ambient`
       },
       {
-        "url": `music/Anti-Flag_This_Is_The_End.mp3`,
+        "url": `music/Half_Pipe.mp3`,
         "genre": `punk-rock`
       },
       {
-        "url": `music/music/Skillet_Monster.mp3`,
+        "url": `music/music/Catch_a_Way.mp3`,
         "genre": `punk-rock`
       }
     ]
   },
   {
-    "title": `heavy metal`,
-    "genre": `heavy-metal`,
+    "title": `рок`,
+    "genre": `rock`,
     "songs": [
       {
         "url": `music/Flaw_-_Whole.mp3`,
         "genre": `alt-metal`
       },
       {
-        "url": `music/Goo_goo_dolls_Iris.mp3`,
-        "genre": `pop-rock`
+        "url": `music/Open_Highway.mp3`,
+        "genre": `rock`
       },
       {
-        "url": `music/Regina_Spektor_All_the_Rowboats.mp3`,
-        "genre": `antifolk`
+        "url": `music/Where_I_am_From.mp3`,
+        "genre": `pop`
       },
       {
-        "url": `music/Scorpions_Your_Last_Song.mp3`,
-        "genre": `heavy-metal`
+        "url": `music/Takeoff.mp3`,
+        "genre": `rock`
       }
     ]
   }
