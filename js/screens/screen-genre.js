@@ -4,21 +4,24 @@ import showResult from "./screen-result";
 import {initializePlayer} from '../player';
 import result from '../data/result';
 
+
+const songsTemplate = (d) =>
+  d.songs
+    .map((song, idx) => `
+      <div class="genre-answer">
+        <div class="player-wrapper"></div>
+        <input type="checkbox" name="answer" value="answer-${idx}" id="a-${idx}">
+        <label class="genre-answer-check" for="a-${idx}"></label>
+      </div>`
+    )
+    .join(``);
+
 export default (data, currentState) => {
 
   const templateGenre = `<section class="main main--level main--level-genre" id="level-genre">
     <h2 class="title">Выберите  ${data.title} треки</h2>
     <form class="genre">
-  
-  ${[...Object.entries(data.songs)].map(([song]) =>
-    ` <div class="genre-answer">
-        <div class="player-wrapper"></div>
-        <input type="checkbox" name="answer" value="answer-${song}" id="a-${song}">
-        <label class="genre-answer-check" for="a-${song}"></label>
-      </div>`).join(``)}
-  
-  
-  
+    ${songsTemplate(data)}
       <button class="genre-answer-send" type="submit" disabled="disabled">Ответить</button>
     </form>
   </section>`;
