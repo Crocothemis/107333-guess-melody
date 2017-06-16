@@ -1,5 +1,5 @@
-const initialState = {
+export default {
   artistCount: 0,
   genreCount: 0
 };
-export default initialState;
+

@@ -1,11 +1,12 @@
 import getElFromTempl from "../get-el-from-tmpl";
 import showScreen from "../show-screen";
-import artists from '../data/artists';
 import {initializePlayer} from '../player';
-import initialState from '../data/initial-data';
 import showScreenGenre from "./screen-genre";
+import genres from '../data/genres';
 
-const templateArtist = (data) => `<section class="main main--level main--level-artist" id="level-artist">
+export default (data, currentState) => {
+
+  const templateArtist = `<section class="main main--level main--level-artist" id="level-artist">
     <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
       <circle
         cx="390" cy="390" r="370"
@@ -51,25 +52,19 @@ const templateArtist = (data) => `<section class="main main--level main--level-a
       </form>
     </div>
   </section>`;
-let artistCount;
 
-if (typeof artistCount === `undefined`) {
-  artistCount = initialState.artistCount;
-}
-
-let data = artists[artistCount];
-export const showScreenArtist = () => {
-  const screenArtist = getElFromTempl(templateArtist(data));
+  const screenArtist = getElFromTempl(templateArtist);
 
   screenArtist.querySelector(`.main-list`).addEventListener(`click`, (e) => {
     if (e.target.closest(`.main-answer-wrapper`)) {
-      showScreenGenre();
+
+      let genre = genres[currentState.genreCount];
+      showScreenGenre(genre, currentState);
     }
+
   });
   initializePlayer(screenArtist.querySelector(`.player-wrapper`), data.url);
   showScreen(screenArtist);
-  artistCount++;
+  currentState.artistCount = currentState.artistCount + 1;
 
 };
-
-export default showScreenArtist;

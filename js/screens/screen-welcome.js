@@ -1,9 +1,10 @@
 import getElFromTempl from "../get-el-from-tmpl";
 import showScreen from "../show-screen";
 import showScreenArtist from "./screen-artist";
-import {windowAnimation} from "../animate";
 
-const templateWelcome = `<section class="main main--welcome" id="welcome">
+export default (data, currentState) => {
+
+  const templateWelcome = `<section class="main main--welcome" id="welcome">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
     <button class="main-play">Начать игру</button>
     <h2 class="title main-title">Правила игры</h2>
@@ -13,13 +14,13 @@ const templateWelcome = `<section class="main main--welcome" id="welcome">
       Удачи!
     </p>
   </section>`;
-
-export const showScreenWelcome = () => {
   const screenWelcome = getElFromTempl(templateWelcome);
 
-  screenWelcome.querySelector(`.main-play`).addEventListener(`click`, showScreenArtist);
+  screenWelcome.querySelector(`.main-play`).addEventListener(`click`, () => {
+    showScreenArtist(data, currentState);
+  });
+
   showScreen(screenWelcome);
 };
 
-export default showScreenWelcome;
 
