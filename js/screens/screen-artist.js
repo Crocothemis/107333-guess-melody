@@ -10,7 +10,7 @@ export default (data, currentState) => {
       .map((variant, idx) => `
       <div class="main-answer-wrapper">
           <input class="main-answer-r" type="radio" id="answer-${idx}" name="answer" value="val-${idx}" />
-          <label class="main-answer" for="answer-2">
+          <label class="main-answer" for="answer-${idx}">
             <img class="main-answer-preview" src="${variant.img}">
             ${variant.name}
           </label>
