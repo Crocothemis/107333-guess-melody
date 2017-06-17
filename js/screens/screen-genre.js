@@ -52,9 +52,9 @@ export default (data, currentState) => {
     return functions[Math.floor(Math.random() * functions.length)];
   };
 
-  for (let it = 0; it < screenGenre.querySelectorAll(`.player-wrapper`).length; it++) {
-    initializePlayer(screenGenre.querySelectorAll(`.player-wrapper`)[it], data.songs[it][`url`]);
-  }
+  [...screenGenre.querySelectorAll(`.player-wrapper`)].forEach((elem, i) => {
+    initializePlayer(elem, data.songs[i][`url`]);
+  });
 
   showScreen(screenGenre);
   currentState.genreCount = currentState.genreCount + 1;
