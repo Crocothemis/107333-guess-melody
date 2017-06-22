@@ -1,62 +1,21 @@
-import getElFromTempl from "../get-el-from-tmpl";
+import GenreView from '../views/genre-view';
 import showScreen from "../show-screen";
 import showResult from "./screen-result";
-import {initializePlayer} from '../player';
 import result from '../data/result';
 
-
-const songsTemplate = (d) =>
-  d.songs
-    .map((song, idx) => `
-      <div class="genre-answer">
-        <div class="player-wrapper"></div>
-        <input type="checkbox" name="answer" value="answer-${idx}" id="a-${idx}">
-        <label class="genre-answer-check" for="a-${idx}"></label>
-      </div>`
-    )
-    .join(``);
-
 export default (data, currentState) => {
+  const view = new GenreView(data);
 
-  const templateGenre = `<section class="main main--level main--level-genre" id="level-genre">
-    <h2 class="title">Выберите  ${data.title} треки</h2>
-    <form class="genre">
-    ${songsTemplate(data)}
-      <button class="genre-answer-send" type="submit" disabled="disabled">Ответить</button>
-    </form>
-  </section>`;
+  view.showResult = () => {
+    const randomFunc = (...functions) => {
+      return functions[Math.floor(Math.random() * functions.length)];
+    };
 
-  const screenGenre = getElFromTempl(templateGenre);
-  const formGenre = screenGenre.querySelector(`.genre`);
-  const answers = Array.prototype.slice.call(screenGenre.querySelectorAll(`input[name="answer"]`));
-  const submitBtn = screenGenre.querySelector(`.genre-answer-send`);
-
-  const isAnswer = () => {
-    return answers.some((el) => el.checked);
-  };
-
-  formGenre.addEventListener(`change`, () => {
-    if (isAnswer()) {
-      submitBtn.removeAttribute(`disabled`);
-    } else {
-      submitBtn.setAttribute(`disabled`, `disabled`);
-    }
-  });
-
-  formGenre.addEventListener(`submit`, (e) => {
-    e.preventDefault();
     showResult(result[randomFunc(`success`, `fail`)], currentState);
-  });
 
-  const randomFunc = (...functions) => {
-    return functions[Math.floor(Math.random() * functions.length)];
   };
 
-  [...screenGenre.querySelectorAll(`.player-wrapper`)].forEach((elem, i) => {
-    initializePlayer(elem, data.songs[i][`url`]);
-  });
-
-  showScreen(screenGenre);
+  showScreen(view.element);
   currentState.genreCount = currentState.genreCount + 1;
 
 };
