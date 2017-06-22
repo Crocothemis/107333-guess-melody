@@ -1,25 +1,16 @@
-import getElFromTempl from "../get-el-from-tmpl";
+import ResultView from '../views/result-view';
 import showScreen from "../show-screen";
 import showScreenWelcome from "./screen-welcome";
 import artists from '../data/artists';
 
-export default (data, currentState) =>{
+export default (data, currentState) => {
+  const view = new ResultView(data);
 
-  const templateResut = `<section class="main main--result" id="result-fail">
-    <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
-    <h2 class="title">${data.title}</h2>
-    <div class="main-stat">${data.stat.text}</div>
-     ${data.stat.comparison ? `<span class="main-comparison">${data.stat.comparison}</span>` : ``}
-    <span role="button" tabindex="0" class="main-replay">Сыграть ещё раз</span>
-  </section>`;
-
-  const screenResult = getElFromTempl(templateResut);
-
-  screenResult.querySelector(`.main-replay`).addEventListener(`click`, () => {
+  view.onClick = () => {
     let newData = artists[currentState.artistCount];
     showScreenWelcome(newData, currentState);
-  });
+  };
 
-  showScreen(screenResult);
+  showScreen(view.element);
 
 };
