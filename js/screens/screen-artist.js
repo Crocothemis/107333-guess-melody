@@ -1,6 +1,5 @@
 import ArtistView from '../views/artist-view';
 import showScreen from "../show-screen";
-
 import showScreenGenre from "./screen-genre";
 import genres from '../data/genres';
 
