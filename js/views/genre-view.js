@@ -13,7 +13,7 @@ export default class GenreView extends AbstractView {
         .map((song, idx) => `
       <div class="genre-answer">
         <div class="player-wrapper"></div>
-        <input type="checkbox" name="answer" value="answer-${idx}" id="a-${idx}">
+        <input type="checkbox" data-genre="${song.genre}" name="answer" value="answer-${idx}" id="a-${idx}">
         <label class="genre-answer-check" for="a-${idx}"></label>
       </div>`
         )
@@ -47,7 +47,16 @@ export default class GenreView extends AbstractView {
 
     formGenre.addEventListener(`submit`, (e) => {
       e.preventDefault();
-      this.showResult();
+
+      const correct = [...this.element.querySelectorAll(`input`)].every((input) => {
+        if (input.dataset.genre === this._genreData.genre) {
+          return input.checked;
+        } else {
+          return !input.checked;
+        }
+      });
+
+      this.onAnswer(correct);
 
     });
 
@@ -57,7 +66,7 @@ export default class GenreView extends AbstractView {
 
   }
 
-  showResult() {
+  onAnswer() {
   }
 
 }

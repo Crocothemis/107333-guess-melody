@@ -1,13 +1,22 @@
 import WelcomeView from '../views/welcome-view';
+import Application from '../application';
 import showScreen from "../show-screen";
-import showScreenArtist from "./screen-artist";
 
-export default (data, currentState) => {
-  const view = new WelcomeView();
+class ScreenWelcome {
+  constructor() {
+  }
 
-  view.onStart = () => {
-    showScreenArtist(data, currentState);
-  };
+  init() {
+    const view = new WelcomeView();
 
-  showScreen(view.element);
-};
+    view.onStart = () => {
+      // showScreenArtist(data, currentState);
+      Application.showGame();
+    };
+
+    showScreen(view.element);
+  }
+}
+
+export default new ScreenWelcome();
+

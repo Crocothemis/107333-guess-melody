@@ -1,16 +1,23 @@
 import ResultView from '../views/result-view';
 import showScreen from "../show-screen";
-import showScreenWelcome from "./screen-welcome";
-import artists from '../data/artists';
+import Application from "../application.js";
 
-export default (data, currentState) => {
-  const view = new ResultView(data);
+class ScreenResult {
+  constructor() {
+  }
 
-  view.onClick = () => {
-    let newData = artists[currentState.artistCount];
-    showScreenWelcome(newData, currentState);
-  };
+  init(data) {
+    const view = new ResultView(data);
 
-  showScreen(view.element);
+    view.onRepeat = () => {
+      // let newData = artists[currentState.artistCount];
+      // showScreenWelcome(newData, currentState);
+      Application.showGame();
+    };
+    showScreen(view.element);
+  }
+}
 
-};
+export default new ScreenResult();
+
+
