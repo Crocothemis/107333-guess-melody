@@ -8,12 +8,10 @@ class ScreenResult {
   }
 
   init() {
-    const data = result[Application.decodeParams(location.hash.replace(`#`, ``)).gameStatus];
+    const data = result[Application.decodeParams(location.hash.replace(`#`, ``).split(`?`)[1]).gameStatus];
     const view = new ResultView(data);
 
     view.onRepeat = () => {
-      // let newData = artists[currentState.artistCount];
-      // showScreenWelcome(newData, currentState);
       Application.showWelcome();
     };
     showScreen(view.element);

@@ -3,16 +3,15 @@ import Application from '../application';
 import showScreen from "../show-screen";
 
 class ScreenWelcome {
-  constructor() {
-    this.view = new WelcomeView();
-  }
 
   init() {
-    this.view.onStart = () => {
+    const view = new WelcomeView();
+
+    view.onStart = () => {
       Application.showGame();
     };
 
-    showScreen(this.view.element);
+    showScreen(view.element);
   }
 }
 
