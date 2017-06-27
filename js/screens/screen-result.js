@@ -12,7 +12,7 @@ class ScreenResult {
     view.onRepeat = () => {
       // let newData = artists[currentState.artistCount];
       // showScreenWelcome(newData, currentState);
-      Application.showGame();
+      Application.showWelcome();
     };
     showScreen(view.element);
   }

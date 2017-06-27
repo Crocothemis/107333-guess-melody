@@ -4,17 +4,15 @@ import showScreen from "../show-screen";
 
 class ScreenWelcome {
   constructor() {
+    this.view = new WelcomeView();
   }
 
   init() {
-    const view = new WelcomeView();
-
-    view.onStart = () => {
-      // showScreenArtist(data, currentState);
+    this.view.onStart = () => {
       Application.showGame();
     };
 
-    showScreen(view.element);
+    showScreen(this.view.element);
   }
 }
 
