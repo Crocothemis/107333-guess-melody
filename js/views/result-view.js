@@ -20,11 +20,11 @@ export default class ResultView extends AbstractView {
     const replay = this.element.querySelector(`.main-replay`);
 
     replay.addEventListener(`click`, () => {
-      this.onClick();
+      this.onRepeat();
     });
   }
 
-  onClick() {
+  onRepeat() {
   }
 
 }

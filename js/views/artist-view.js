@@ -11,7 +11,7 @@ export default class ArtistView extends AbstractView {
     const artistTemplate = (d) =>
       d.variants
         .map((variant, idx) => `
-      <div class="main-answer-wrapper">
+      <div class="main-answer-wrapper" data-artist="${variant.name}">
           <input class="main-answer-r" type="radio" id="answer-${idx}" name="answer" value="val-${idx}" />
           <label class="main-answer" for="answer-${idx}">
             <img class="main-answer-preview" src="${variant.img}">
@@ -51,8 +51,9 @@ export default class ArtistView extends AbstractView {
     const playBtn = this.element.querySelector(`.main-list`);
 
     playBtn.addEventListener(`click`, (e) => {
-      if (e.target.closest(`.main-answer-wrapper`)) {
-        this.onClick();
+      const answer = e.target.closest(`.main-answer-wrapper`);
+      if (answer) {
+        this.onAnswer(this._artistData.trueAnswer === answer.dataset.artist);
       }
     });
 
@@ -60,7 +61,7 @@ export default class ArtistView extends AbstractView {
 
   }
 
-  onClick() {
+  onAnswer() {
   }
 
 }
