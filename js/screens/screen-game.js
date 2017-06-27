@@ -6,7 +6,7 @@ import showScreen from "../show-screen";
 import {countAnswer} from '../helpers/count-answer';
 import random from '../helpers/random';
 import Application from "../application.js";
-import result from "../data/result";
+
 
 const initialState = Object.freeze({
   lives: 3,
@@ -43,7 +43,7 @@ class ScreenGame {
       if (!nextState.gameStatus) {
         this.changeLevel(nextState);
       } else {
-        Application.showResult(result[nextState.gameStatus]);
+        Application.showResult(nextState);
       }
 
     };

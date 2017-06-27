@@ -8,7 +8,7 @@ const ControllerID = {
   RESULT: `result`
 };
 
-const getComtrollerFromHash = (hash) => hash.replace(`#`, ``);
+const getControllerFromHash = (hash) => hash.replace(`#`, ``).split(`?`)[0];
 
 class Application {
 
@@ -20,16 +20,16 @@ class Application {
     };
 
     window.onhashchange = () => {
-      this.changeController(getComtrollerFromHash(location.hash));
+      this.changeController(getControllerFromHash(location.hash));
     };
   }
 
-  changeController(route = ``) {
+  changeController(route = `result`) {
     this.routes[route].init();
   }
 
   init() {
-    this.changeController(getComtrollerFromHash(location.hash));
+    this.changeController(getControllerFromHash(location.hash));
   }
 
   showWelcome() {
@@ -40,8 +40,28 @@ class Application {
     location.hash = ControllerID.GAME;
   }
 
-  showResult() {
-    location.hash = ControllerID.RESULT;
+  showResult(data) {
+    location.hash = ControllerID.RESULT + `?` + this.encodeParams(data);
+  }
+
+  encodeParams(obj) {
+    let str = ``;
+    for (let key in obj) {
+      if (str !== ``) {
+        str += `&`;
+      }
+      str += key + `=` + encodeURIComponent(obj[key]);
+    }
+    return str;
+  }
+
+  decodeParams(str) {
+    let obj = {};
+    str.split(`&`).forEach(function (part) {
+      let item = part.split(`=`);
+      obj[item[0]] = decodeURIComponent(item[1]);
+    });
+    return obj;
   }
 
 }
