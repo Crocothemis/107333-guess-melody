@@ -23,23 +23,23 @@ class ScreenGame {
   get view() {
     return this._view;
   }
-  
+
   set view(view) {
     this._view = view;
     showScreen(view.element);
   }
 
   changeLevel(state) {
-    
+
     let self = this;
 
-    getData().then(function(v) {
+    getData().then((v) => {
 
       self.view = getQuestion(v);
 
       self.view.onAnswer = (correct) => {
-        const nextState = countAnswer(state, {correct, time: 12000});
-
+        let nextState = countAnswer(state, {correct, time: 12000});
+        console.log(nextState);
         if (!nextState.gameStatus) {
           self.changeLevel(nextState);
         } else {
@@ -47,22 +47,21 @@ class ScreenGame {
         }
 
       };
-      
-    })
-    .catch(function(e) {console.log(e)});
-    
+
+    }).catch(function(e) {console.log(e)});
+
   }
 
 }
 
 const getQuestion = (json) => {
-  
+
   if (json.type === `artist`) {
     return new ArtistView(json);
   } else if (json.type === `genre`) {
     return new GenreView(json);
   }
- 
+
 };
 
 export default new ScreenGame();
