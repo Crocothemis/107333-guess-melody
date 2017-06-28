@@ -1,12 +1,9 @@
 import GenreView from '../views/genre-view';
 import ArtistView from '../views/artist-view';
-import artists from '../data/artists';
-import genres from '../data/genres';
+import getData from '../data/get-data'
 import showScreen from "../show-screen";
 import {countAnswer} from '../helpers/count-answer';
-import random from '../helpers/random';
 import Application from "../application.js";
-
 
 const initialState = Object.freeze({
   lives: 3,
@@ -26,37 +23,46 @@ class ScreenGame {
   get view() {
     return this._view;
   }
-
+  
   set view(view) {
     this._view = view;
     showScreen(view.element);
   }
 
   changeLevel(state) {
-    const getView = random(artistFunc, genreFunc);
+    
+    let self = this;
 
-    this.view = getView();
+    getData().then(function(v) {
 
-    this.view.onAnswer = (correct) => {
-      const nextState = countAnswer(state, {correct, time: 12000});
+      self.view = getQuestion(v);
 
-      if (!nextState.gameStatus) {
-        this.changeLevel(nextState);
-      } else {
-        Application.showResult(nextState);
-      }
+      self.view.onAnswer = (correct) => {
+        const nextState = countAnswer(state, {correct, time: 12000});
 
-    };
+        if (!nextState.gameStatus) {
+          self.changeLevel(nextState);
+        } else {
+          Application.showResult(nextState);
+        }
+
+      };
+      
+    })
+    .catch(function(e) {console.log(e)});
+    
   }
 
 }
 
-const artistFunc = () => {
-  return new ArtistView(artists[0]);
-};
-
-const genreFunc = () => {
-  return new GenreView(genres[0]);
+const getQuestion = (json) => {
+  
+  if (json.type === `artist`) {
+    return new ArtistView(json);
+  } else if (json.type === `genre`) {
+    return new GenreView(json);
+  }
+ 
 };
 
 export default new ScreenGame();
