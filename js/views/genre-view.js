@@ -5,11 +5,10 @@ export default class GenreView extends AbstractView {
   constructor(data) {
     super();
     this._genreData = data;
-    console.log(this._genreData.answers);
   }
-  
+
   get template() {
-    
+
     const songsTemplate = (d) =>
       d.answers
         .map((song, idx) => `

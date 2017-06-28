@@ -1,6 +1,6 @@
 import GenreView from '../views/genre-view';
 import ArtistView from '../views/artist-view';
-import getData from '../data/get-data'
+import getData from '../data/get-data';
 import showScreen from "../show-screen";
 import {countAnswer} from '../helpers/count-answer';
 import Application from "../application.js";
@@ -38,8 +38,8 @@ class ScreenGame {
       self.view = getQuestion(v);
 
       self.view.onAnswer = (correct) => {
-        let nextState = countAnswer(state, {correct, time: 12000});
-        console.log(nextState);
+        const nextState = countAnswer(state, {correct, time: 12000});
+
         if (!nextState.gameStatus) {
           self.changeLevel(nextState);
         } else {
@@ -48,7 +48,7 @@ class ScreenGame {
 
       };
 
-    }).catch(function(e) {console.log(e)});
+    }).catch(function (e) {});
 
   }
 
@@ -58,10 +58,8 @@ const getQuestion = (json) => {
 
   if (json.type === `artist`) {
     return new ArtistView(json);
-  } else if (json.type === `genre`) {
-    return new GenreView(json);
   }
-
+  return new GenreView(json);
 };
 
 export default new ScreenGame();

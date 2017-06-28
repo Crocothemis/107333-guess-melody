@@ -5,7 +5,7 @@ export default class ArtistView extends AbstractView {
   constructor(data) {
     super();
     this._artistData = data;
-  } 
+  }
 
   get template() {
     const artistTemplate = (d) =>
