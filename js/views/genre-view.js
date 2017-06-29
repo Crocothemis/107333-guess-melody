@@ -46,17 +46,17 @@ export default class GenreView extends AbstractView {
       }
     });
 
+    const inputs = [...this.element.querySelectorAll(`input`)];
+
     formGenre.addEventListener(`submit`, (e) => {
       e.preventDefault();
-
-      const correct = [...this.element.querySelectorAll(`input`)].every((input) => {
+      const correct = inputs.every((input) => {
         if (input.dataset.genre === this._genreData.genre) {
           return input.checked;
         } else {
           return !input.checked;
         }
       });
-
       this.onAnswer(correct);
 
     });
