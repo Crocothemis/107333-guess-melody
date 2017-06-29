@@ -1,8 +1,8 @@
 import Application from "./application.js";
-import getData from './data/get-data';
+import Model from './model';
 
 document.addEventListener(`DOMContentLoaded`, () => {
-  getData.then((value) => {
+  Model.getData().then((value) => {
     Application.init(value);
   }).catch(function (e) {});
 

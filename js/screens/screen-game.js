@@ -3,6 +3,7 @@ import ArtistView from '../views/artist-view';
 import showScreen from "../show-screen";
 import {countAnswer} from '../helpers/count-answer';
 import Application from "../application.js";
+import Model from '../model';
 
 const initialState = Object.freeze({
   lives: 3,
@@ -39,12 +40,18 @@ class ScreenGame {
       if (!nextState.gameStatus) {
         this.changeLevel(nextState, value);
       } else {
-        Application.showResult(nextState);
-      }
+        const answers = 10 - nextState.questionsLeft;
+        const statData = JSON.stringify({
+          time: 23,
+          answers
+        });
 
+        Model.sendData(statData).then(() => {
+          Application.showResult(nextState);
+        });
+      }
     };
   }
-
 }
 
 const getQuestion = (json) => {
