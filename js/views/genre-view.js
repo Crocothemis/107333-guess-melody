@@ -8,8 +8,9 @@ export default class GenreView extends AbstractView {
   }
 
   get template() {
+
     const songsTemplate = (d) =>
-      d.songs
+      d.answers
         .map((song, idx) => `
       <div class="genre-answer">
         <div class="player-wrapper"></div>
@@ -20,7 +21,7 @@ export default class GenreView extends AbstractView {
         .join(``);
 
     return `<section class="main main--level main--level-genre" id="level-genre">
-    <h2 class="title">Выберите  ${this._genreData.title} треки</h2>
+    <h2 class="title">${this._genreData.question}</h2>
     <form class="genre">
     ${songsTemplate(this._genreData)}
       <button class="genre-answer-send" type="submit" disabled="disabled">Ответить</button>
@@ -45,23 +46,23 @@ export default class GenreView extends AbstractView {
       }
     });
 
+    const inputs = [...this.element.querySelectorAll(`input`)];
+
     formGenre.addEventListener(`submit`, (e) => {
       e.preventDefault();
-
-      const correct = [...this.element.querySelectorAll(`input`)].every((input) => {
+      const correct = inputs.every((input) => {
         if (input.dataset.genre === this._genreData.genre) {
           return input.checked;
         } else {
           return !input.checked;
         }
       });
-
       this.onAnswer(correct);
 
     });
 
     [...this.element.querySelectorAll(`.player-wrapper`)].forEach((elem, i) => {
-      initializePlayer(elem, this._genreData.songs[i][`url`]);
+      initializePlayer(elem, this._genreData.answers[i][`src`]);
     });
 
   }
