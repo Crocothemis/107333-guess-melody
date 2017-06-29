@@ -1,8 +1,6 @@
 import GenreView from '../views/genre-view';
 import ArtistView from '../views/artist-view';
-import getData from '../data/get-data';
 import showScreen from "../show-screen";
-import {random} from '../helpers/random';
 import {countAnswer} from '../helpers/count-answer';
 import Application from "../application.js";
 
@@ -17,10 +15,9 @@ class ScreenGame {
   constructor() {
   }
 
-  init() {
-    getData.then((value) => {
-      this.changeLevel(initialState, value);
-    }).catch(function (e) {});
+  init(data) {
+    this.questionCount = 0;
+    this.changeLevel(initialState, data);
   }
 
   get view() {
@@ -32,15 +29,15 @@ class ScreenGame {
     showScreen(view.element);
   }
 
-  changeLevel(state, v) {
+  changeLevel(state, value) {
 
-    this.view = getQuestion(random(v));
-
+    this.view = getQuestion((value[this.questionCount]));
+    this.questionCount++;
     this.view.onAnswer = (correct) => {
       const nextState = countAnswer(state, {correct, time: 12000});
 
       if (!nextState.gameStatus) {
-        this.changeLevel(nextState, v);
+        this.changeLevel(nextState, value);
       } else {
         Application.showResult(nextState);
       }

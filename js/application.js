@@ -25,10 +25,11 @@ class Application {
   }
 
   changeController(route = `result`) {
-    this.routes[route].init();
+    this.routes[route].init(this.data);
   }
 
-  init() {
+  init(data) {
+    this.data = data;
     this.changeController(getControllerFromHash(location.hash));
   }
 

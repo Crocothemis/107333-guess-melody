@@ -10,5 +10,4 @@ const getData = (url) => new Promise(function (resolve) {
   });
 });
 
-
 export default getData(`https://intensive-ecmascript-server-btfgudlkpi.now.sh/guess-melody/questions`);
