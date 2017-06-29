@@ -5,7 +5,7 @@ export const countAnswer = (prevState, answerData) => {
 
   if (answerData.correct === true) {
     currentState.correctAnswers++;
-    if (answerData.time > 10000) {
+    if (answerData.time > 10) {
       currentState.points++;
     } else {
       currentState.points += 2;

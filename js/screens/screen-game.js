@@ -32,11 +32,13 @@ class ScreenGame {
   }
 
   changeLevel(state, value) {
+    const levelTime = Math.floor(Date.now() / 1000);
 
     this.view = getQuestion((value[this.questionCount]));
     this.questionCount++;
     this.view.onAnswer = (correct) => {
-      const nextState = countAnswer(state, {correct, time: 12000});
+      const time = Math.floor(Date.now() / 1000) - levelTime;
+      const nextState = countAnswer(state, {correct, time});
 
       if (!nextState.gameStatus) {
         this.changeLevel(nextState, value);
