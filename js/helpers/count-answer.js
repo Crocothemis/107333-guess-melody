@@ -2,7 +2,7 @@ export const countAnswer = (prevState, answerData) => {
   const currentState = Object.assign({}, prevState);
 
   currentState.questionsLeft--;
-
+  currentState.totalTime += answerData.time;
   if (answerData.correct === true) {
     currentState.correctAnswers++;
     if (answerData.time > 10) {

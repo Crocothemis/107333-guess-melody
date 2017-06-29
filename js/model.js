@@ -11,6 +11,12 @@ class Model {
       .catch((e)=> window.console.log(e));
   }
 
+  getStat() {
+    return fetch(statsUrl).
+    then((resp) => resp.json())
+      .catch((e)=> window.console.log(e));
+  }
+
   sendData(data) {
     const requestSettings = {
       body: data,

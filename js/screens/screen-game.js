@@ -10,6 +10,7 @@ const initialState = Object.freeze({
   questionsLeft: 10,
   points: 0,
   correctAnswers: 0,
+  totalTime: 0,
   gameStatus: null
 });
 
@@ -45,12 +46,14 @@ class ScreenGame {
       } else {
 
         const statData = JSON.stringify({
-          time: 23,
+          time: nextState.totalTime,
           answers: nextState.correctAnswers
         });
 
         Model.sendData(statData).then(() => {
-          Application.showResult(nextState);
+          Model.getStat().then((allStat) => {
+            Application.showResult(nextState);
+          });
         });
       }
     };
