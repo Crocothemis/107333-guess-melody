@@ -2,6 +2,7 @@ import GenreView from '../views/genre-view';
 import ArtistView from '../views/artist-view';
 import showScreen from "../show-screen";
 import {countAnswer} from '../helpers/count-answer';
+import {statSort, getLowerResultPlayers} from '../helpers/stats';
 import Application from "../application.js";
 import Model from '../model';
 
@@ -11,6 +12,7 @@ const initialState = Object.freeze({
   points: 0,
   correctAnswers: 0,
   totalTime: 0,
+  lowerResult: 0,
   gameStatus: null
 });
 
@@ -47,11 +49,12 @@ class ScreenGame {
 
         const statData = JSON.stringify({
           time: nextState.totalTime,
-          answers: nextState.correctAnswers
+          points: nextState.points
         });
 
         Model.sendData(statData).then(() => {
           Model.getStat().then((allStat) => {
+            nextState.lowerResult = Math.floor((getLowerResultPlayers.length / statSort(allStat).length) * 100);
             Application.showResult(nextState);
           });
         });

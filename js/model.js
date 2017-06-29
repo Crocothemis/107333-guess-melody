@@ -13,7 +13,7 @@ class Model {
 
   getStat() {
     return fetch(statsUrl).
-    then((resp) => resp.json())
+      then((resp) => resp.json())
       .catch((e)=> window.console.log(e));
   }
 

@@ -7,15 +7,21 @@ describe(`countAnswer`, () => {
       lives: 3,
       questionsLeft: 10,
       points: 0,
+      correctAnswers: 0,
+      totalTime: 0,
+      lowerResult: 0,
       gameStatus: null
     });
 
-    const nextState = countAnswer(prevState, {correct: true, time: 12000});
+    const nextState = countAnswer(prevState, {correct: true, time: 12});
 
     assert.deepEqual(nextState, {
       lives: 3,
       questionsLeft: 9,
       points: 1,
+      correctAnswers: 1,
+      totalTime: 12,
+      lowerResult: 0,
       gameStatus: null
     });
   });
@@ -25,15 +31,21 @@ describe(`countAnswer`, () => {
       lives: 3,
       questionsLeft: 10,
       points: 0,
+      correctAnswers: 0,
+      totalTime: 0,
+      lowerResult: 0,
       gameStatus: null
     });
 
-    const nextState = countAnswer(prevState, {correct: true, time: 2000});
+    const nextState = countAnswer(prevState, {correct: true, time: 7});
 
     assert.deepEqual(nextState, {
       lives: 3,
       questionsLeft: 9,
       points: 2,
+      correctAnswers: 1,
+      totalTime: 7,
+      lowerResult: 0,
       gameStatus: null
     });
   });
@@ -43,15 +55,21 @@ describe(`countAnswer`, () => {
       lives: 3,
       questionsLeft: 10,
       points: 0,
+      correctAnswers: 0,
+      totalTime: 0,
+      lowerResult: 0,
       gameStatus: null
     });
 
-    const nextState = countAnswer(prevState, {correct: false, time: 2000});
+    const nextState = countAnswer(prevState, {correct: false, time: 12});
 
     assert.deepEqual(nextState, {
       lives: 2,
       questionsLeft: 9,
       points: 0,
+      correctAnswers: 0,
+      totalTime: 12,
+      lowerResult: 0,
       gameStatus: null
     });
   });
@@ -61,15 +79,21 @@ describe(`countAnswer`, () => {
       lives: 1,
       questionsLeft: 10,
       points: 0,
+      correctAnswers: 0,
+      totalTime: 0,
+      lowerResult: 0,
       gameStatus: null
     });
 
-    const nextState = countAnswer(prevState, {correct: false, time: 2000});
+    const nextState = countAnswer(prevState, {correct: false, time: 12});
 
     assert.deepEqual(nextState, {
       lives: 0,
       questionsLeft: 9,
       points: 0,
+      correctAnswers: 0,
+      totalTime: 12,
+      lowerResult: 0,
       gameStatus: `fail`
     });
   });
@@ -78,16 +102,22 @@ describe(`countAnswer`, () => {
     const prevState = Object.freeze({
       lives: 3,
       questionsLeft: 1,
-      points: 23,
+      points: 24,
+      correctAnswers: 9,
+      totalTime: 0,
+      lowerResult: 0,
       gameStatus: null
     });
 
-    const nextState = countAnswer(prevState, {correct: true, time: 2000});
+    const nextState = countAnswer(prevState, {correct: true, time: 12});
 
     assert.deepEqual(nextState, {
       lives: 3,
       questionsLeft: 0,
       points: 25,
+      correctAnswers: 10,
+      totalTime: 12,
+      lowerResult: 0,
       gameStatus: `success`
     });
   });
@@ -96,16 +126,22 @@ describe(`countAnswer`, () => {
     const prevState = Object.freeze({
       lives: 1,
       questionsLeft: 1,
-      points: 23,
+      points: 0,
+      correctAnswers: 0,
+      totalTime: 0,
+      lowerResult: 0,
       gameStatus: null
     });
 
-    const nextState = countAnswer(prevState, {correct: false, time: 2000});
+    const nextState = countAnswer(prevState, {correct: false, time: 120});
 
     assert.deepEqual(nextState, {
       lives: 0,
       questionsLeft: 0,
-      points: 23,
+      points: 0,
+      correctAnswers: 0,
+      totalTime: 120,
+      lowerResult: 0,
       gameStatus: `fail`
     });
   });
