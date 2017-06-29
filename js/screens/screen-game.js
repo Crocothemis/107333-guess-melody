@@ -9,6 +9,7 @@ const initialState = Object.freeze({
   lives: 3,
   questionsLeft: 10,
   points: 0,
+  correctAnswers: 0,
   gameStatus: null
 });
 
@@ -40,10 +41,10 @@ class ScreenGame {
       if (!nextState.gameStatus) {
         this.changeLevel(nextState, value);
       } else {
-        const answers = 10 - nextState.questionsLeft;
+
         const statData = JSON.stringify({
           time: 23,
-          answers
+          answers: nextState.correctAnswers
         });
 
         Model.sendData(statData).then(() => {
