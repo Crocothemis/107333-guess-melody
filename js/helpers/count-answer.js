@@ -3,7 +3,7 @@ export const countAnswer = (prevState, answerData) => {
 
   currentState.questionsLeft--;
 
-  if (answerData.correct) {
+  if (answerData.correct === true) {
     if (answerData.time > 10000) {
       currentState.points++;
     } else {

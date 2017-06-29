@@ -9,13 +9,13 @@ export default class ArtistView extends AbstractView {
 
   get template() {
     const artistTemplate = (d) =>
-      d.variants
+      d.answers
         .map((variant, idx) => `
-      <div class="main-answer-wrapper">
+      <div class="main-answer-wrapper" data-correct="${variant.isCorrect}">
           <input class="main-answer-r" type="radio" id="answer-${idx}" name="answer" value="val-${idx}" />
           <label class="main-answer" for="answer-${idx}">
-            <img class="main-answer-preview" src="${variant.img}">
-            ${variant.name}
+            <img class="main-answer-preview" src="${variant.image.url}" width="${variant.image.width}" height="${variant.image.height}">
+            ${variant.title}
           </label>
         </div>`
         )
@@ -38,7 +38,7 @@ export default class ArtistView extends AbstractView {
     <div class="main-wrap">
       <div class="main-timer"></div>
 
-      <h2 class="title main-title">Кто исполняет эту песню?</h2>
+      <h2 class="title main-title">${this._artistData.question}</h2>
       <div class="player-wrapper"></div>
       <form class="main-list">
         ${artistTemplate(this._artistData)}
@@ -51,16 +51,18 @@ export default class ArtistView extends AbstractView {
     const playBtn = this.element.querySelector(`.main-list`);
 
     playBtn.addEventListener(`click`, (e) => {
-      if (e.target.closest(`.main-answer-wrapper`)) {
-        this.onClick();
+      const answer = e.target.closest(`.main-answer-wrapper`);
+      if (answer) {
+        let isCorrect = (answer.dataset.correct === `true`);
+        this.onAnswer(isCorrect);
       }
     });
 
-    initializePlayer(this.element.querySelector(`.player-wrapper`), this._artistData.url);
+    initializePlayer(this.element.querySelector(`.player-wrapper`), this._artistData.src);
 
   }
 
-  onClick() {
+  onAnswer() {
   }
 
 }
