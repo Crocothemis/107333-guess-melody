@@ -6,8 +6,8 @@ class ScreenResult {
   constructor() {
   }
 
-  init() {
-    const finalState = Application.decodeParams(location.hash.replace(`#`, ``).split(`?`)[1]);
+  init(finalState) {
+    // const finalState = Application.decodeParams(location.hash.replace(`#`, ``).split(`?`)[1]);
     const view = new ResultView(finalState);
 
     view.onRepeat = () => {

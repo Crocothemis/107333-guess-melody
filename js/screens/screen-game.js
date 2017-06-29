@@ -52,12 +52,12 @@ class ScreenGame {
           points: nextState.points
         });
 
-        Model.sendData(statData).then(() => {
-          Model.getStat().then((allStat) => {
+        Model.sendData(statData)
+          .then(() => Model.getStat())
+          .then((allStat) => {
             nextState.lowerResult = Math.floor((getLowerResultPlayers.length / statSort(allStat).length) * 100);
             Application.showResult(nextState);
           });
-        });
       }
     };
   }

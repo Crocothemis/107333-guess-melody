@@ -25,6 +25,9 @@ class Application {
   }
 
   changeController(route = `result`) {
+    if (route === `result`) {
+      this.data = this.decodeParams(location.hash.replace(`#`, ``).split(`?`)[1]);
+    }
     this.routes[route].init(this.data);
   }
 
