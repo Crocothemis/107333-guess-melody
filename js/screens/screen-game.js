@@ -44,7 +44,6 @@ class ScreenGame {
     this.view = getQuestion((value[this.questionCount]));
 
     this.questionCount++;
-    this.checkTimeLeft(state);
     this.view.onAnswer = (correct) => {
       const time = Math.floor(Date.now() / 1000) - levelTime;
       const nextState = countAnswer(state, {correct, time});
@@ -73,32 +72,20 @@ class ScreenGame {
     this.timeLeft = timeLeft;
     this.timerUpdate = setInterval(() => {
       this.timeLeft--;
+      if (this.timeLeft === 0) {
+        Application.showResult({gameStatus: `fail`});
+        this.timerStop();
+      }
       this.view.updateTimeLeft(this.timeLeft);
     }, 1000);
   }
 
-  checkTimeLeft(state) {
-    this.checkTime = setInterval(() => {
-      if (this.timeLeft === 0) {
-        this.failGame(state);
-      }
-    }, 1000);
-  }
-
-  failGame(state) {
-    state.gameStatus = `fail`;
-    Application.showResult(state);
-    this.timerStop();
-  }
-
   timerStop() {
     clearInterval(this.timerUpdate);
-    clearInterval(this.checkTime);
   }
 }
 
 const getQuestion = (json) => {
-
   if (json.type === `artist`) {
     return new ArtistView(json);
   }
