@@ -8,13 +8,11 @@ export default class AbstractView {
   render() {
     return getElFromTempl(this.template);
   }
-  
-  postRender() {
-    
-  }
-  
-  bind() {
 
+  postRender() {
+  }
+
+  bind() {
   }
 
   get element() {

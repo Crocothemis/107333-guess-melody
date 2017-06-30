@@ -26,6 +26,7 @@ class ScreenGame {
     this.questionCount = 0;
     this.startGame(120);
     initCountdown();
+    formatTime();
     this.changeLevel(initialState, data);
   }
 
