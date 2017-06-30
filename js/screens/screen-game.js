@@ -40,27 +40,23 @@ class ScreenGame {
 
   changeLevel(state, value) {
     const levelTime = Math.floor(Date.now() / 1000);
-
     this.view = getQuestion((value[this.questionCount]));
-    
+
     this.questionCount++;
-    
+    this.checkTimeLeft(state);
     this.view.onAnswer = (correct) => {
-      
       const time = Math.floor(Date.now() / 1000) - levelTime;
-      
       const nextState = countAnswer(state, {correct, time});
-      
-      this.checkTimeLeft(nextState);
-      
+
       if (!nextState.gameStatus) {
         this.changeLevel(nextState, value);
       } else {
-
         const statData = JSON.stringify({
           time: nextState.totalTime,
           points: nextState.points
         });
+
+        this.timerStop();
 
         Model.sendData(statData)
           .then(() => Model.getStat())
@@ -71,20 +67,18 @@ class ScreenGame {
       }
     };
   }
-  
+
   startGame(timeLeft) {
     this.timeLeft = timeLeft;
-    // this.view.updateTimeLeft(this.timeLeft);
     this.timerUpdate = setInterval(() => {
       this.timeLeft--;
       this.view.updateTimeLeft(this.timeLeft);
     }, 1000);
   }
-  
+
   checkTimeLeft(state) {
     this.checkTime = setInterval(() => {
       if (this.timeLeft === 0) {
-        this.timerStop();
         this.failGame(state);
       }
     }, 1000);
@@ -93,8 +87,9 @@ class ScreenGame {
   failGame(state) {
     state.gameStatus = `fail`;
     Application.showResult(state);
+    this.timerStop();
   }
-  
+
   timerStop() {
     clearInterval(this.timerUpdate);
     clearInterval(this.checkTime);

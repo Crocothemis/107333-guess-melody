@@ -12,7 +12,7 @@ export default class ArtistView extends AbstractView {
     this._timer = new TimerView();
     this.element.querySelector(`.main--level`).insertBefore(this._timer.element, this.element.querySelector(`.main-wrap`));
   }
-  
+
   updateTimeLeft(timeLeft) {
     this._timer.updateTimeLeft(timeLeft);
   }
@@ -56,7 +56,6 @@ export default class ArtistView extends AbstractView {
     });
 
     initializePlayer(this.element.querySelector(`.player-wrapper`), this._artistData.src);
-
   }
 
   onAnswer() {

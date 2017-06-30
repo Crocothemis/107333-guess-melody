@@ -1,6 +1,6 @@
 import AbstractView from "./abstract-view.js";
 import result from "../data/result";
-import timeFormat from "../helpers/timeFormat";
+import timeFormat from "../helpers/time-format";
 
 export default class ResultView extends AbstractView {
   constructor(finalState) {

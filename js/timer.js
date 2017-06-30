@@ -49,4 +49,4 @@ export const initCountdown = () => {
       redrawTimer(timer, animation);
     }, () => timer.classList.add(`timer-value--finished`));
   };
-}
+};
