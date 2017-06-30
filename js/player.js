@@ -1,13 +1,15 @@
+import animationInit from './animate';
+
+animationInit();
+
 const updateState = (element, player) => {
   element.querySelector(`.player-status`).style.width =
       `${parseInt(player.currentTime * 100 / player.duration, 10)}%`;
 };
 
-
 const syncState = (player, element) => {
   element.classList.toggle(`player--is-playing`, !player.paused);
 };
-
 
 const switchState = (state, player, element) => {
   if (player.paused) {

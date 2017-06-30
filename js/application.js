@@ -1,6 +1,7 @@
 import screenWelcome from "./screens/screen-welcome";
 import screenGame from './screens/screen-game';
 import screenResult from './screens/screen-result';
+import Model from './model';
 
 const ControllerID = {
   WELCOME: ``,
@@ -25,12 +26,28 @@ class Application {
   }
 
   changeController(route = `result`) {
-    this.routes[route].init(this.data);
+    if (route === `result`) {
+      this.routes[route].init(this.decodeParams(location.hash.replace(`#`, ``).split(`?`)[1]));
+    } else if (route === ``) {
+      Model.getData()
+        .then((value) => {
+          this.data = value;
+          this.routes[route].init(this.data);
+        })
+        .catch(function (e) {});
+    } else {
+      this.routes[route].init(this.data);
+    }
+
   }
 
-  init(data) {
-    this.data = data;
-    this.changeController(getControllerFromHash(location.hash));
+  init() {
+    Model.getData()
+      .then((value) => {
+        this.data = value;
+        this.changeController(getControllerFromHash(location.hash));
+      })
+      .catch(function (e) {});
   }
 
   showWelcome() {

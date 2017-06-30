@@ -2,9 +2,10 @@ export const countAnswer = (prevState, answerData) => {
   const currentState = Object.assign({}, prevState);
 
   currentState.questionsLeft--;
-
+  currentState.totalTime = currentState.totalTime + answerData.time;
   if (answerData.correct === true) {
-    if (answerData.time > 10000) {
+    currentState.correctAnswers++;
+    if (answerData.time > 10) {
       currentState.points++;
     } else {
       currentState.points += 2;
