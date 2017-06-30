@@ -1,10 +1,20 @@
 import AbstractView from "./abstract-view.js";
+import TimerView from '../views/timer-view';
 import {initializePlayer} from '../player';
 
 export default class GenreView extends AbstractView {
   constructor(data) {
     super();
     this._genreData = data;
+  }
+
+  postRender() {
+    this._timer = new TimerView();
+    this.element.querySelector(`.main--level`).insertBefore(this._timer.element, this.element.querySelector(`.main-wrap`));
+  }
+
+  updateTimeLeft(timeLeft) {
+    this._timer.updateTimeLeft(timeLeft);
   }
 
   get template() {
@@ -21,11 +31,16 @@ export default class GenreView extends AbstractView {
         .join(``);
 
     return `<section class="main main--level main--level-genre" id="level-genre">
-    <h2 class="title">${this._genreData.question}</h2>
-    <form class="genre">
-    ${songsTemplate(this._genreData)}
-      <button class="genre-answer-send" type="submit" disabled="disabled">Ответить</button>
-    </form>
+     
+    <div class="main-wrap">
+      <div class="main-timer"></div>
+      
+      <h2 class="title">${this._genreData.question}</h2>
+      <form class="genre">
+      ${songsTemplate(this._genreData)}
+        <button class="genre-answer-send" type="submit" disabled="disabled">Ответить</button>
+      </form>
+    </div>
   </section>`.trim();
   }
 

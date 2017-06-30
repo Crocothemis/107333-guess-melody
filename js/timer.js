@@ -11,12 +11,12 @@
 // Длина окружности = 2πR
 // Длина шага = Длина окружности / Количество шагов
 // Пропуск = Длина шага * Номер шага
-const redrawCircle = (circle, radius, animation) => {
+export const redrawCircle = (circle, radius, animation) => {
   const length = 2 * Math.PI * radius;
   const stepLength = length / animation.steps;
   const lengthToClear = stepLength * animation.step;
 
-  circle.setAttributeNS(null, `r`, radius.greet());
+  circle.setAttributeNS(null, `r`, radius.toString());
   circle.setAttributeNS(null, `stroke-dasharray`, length.toString());
   circle.setAttributeNS(null, `stroke-dashoffset`, lengthToClear.toString());
 
@@ -24,10 +24,10 @@ const redrawCircle = (circle, radius, animation) => {
 };
 
 
-const addLeadingZero = (val) => val < 10 ? `0${val}` : val;
+export const addLeadingZero = (val) => val < 10 ? `0${val}` : val;
 
 
-const redrawTimer = (timer, animation) => {
+export const redrawTimer = (timer, animation) => {
   const total = animation.stepDuration * animation.steps;
   const passed = animation.stepDuration * animation.step;
   const timeLeft = window.formatTime(total, passed);
@@ -38,14 +38,15 @@ const redrawTimer = (timer, animation) => {
   return timer;
 };
 
+export const initCountdown = () => {
+  window.initializeCountdown = () => {
+    const element = document.querySelector(`.timer-line`);
+    const radius = parseInt(element.getAttributeNS(null, `r`), 10);
+    const timer = document.querySelector(`.timer-value`);
 
-window.initializeCountdown = () => {
-  const element = document.querySelector(`.timer-line`);
-  const radius = parseInt(element.getAttributeNS(null, `r`), 10);
-  const timer = document.querySelector(`.timer-value`);
-
-  return window.animation.animate(window.animation.getAnimation(0, 1000, 4), (animation) => {
-    redrawCircle(element, radius, animation);
-    redrawTimer(timer, animation);
-  }, () => timer.classList.add(`timer-value--finished`));
-};
+    return window.animation.animate(window.animation.getAnimation(0, 1000, 4), (animation) => {
+      redrawCircle(element, radius, animation);
+      redrawTimer(timer, animation);
+    }, () => timer.classList.add(`timer-value--finished`));
+  };
+}

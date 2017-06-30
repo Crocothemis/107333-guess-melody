@@ -1,10 +1,20 @@
 import AbstractView from "./abstract-view.js";
+import TimerView from '../views/timer-view';
 import {initializePlayer} from '../player';
 
 export default class ArtistView extends AbstractView {
   constructor(data) {
     super();
     this._artistData = data;
+  }
+
+  postRender() {
+    this._timer = new TimerView();
+    this.element.querySelector(`.main--level`).insertBefore(this._timer.element, this.element.querySelector(`.main-wrap`));
+  }
+  
+  updateTimeLeft(timeLeft) {
+    this._timer.updateTimeLeft(timeLeft);
   }
 
   get template() {
@@ -22,19 +32,6 @@ export default class ArtistView extends AbstractView {
         .join(``);
 
     return `<section class="main main--level main--level-artist" id="level-artist">
-    <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
-      <circle
-        cx="390" cy="390" r="370"
-        class="timer-line"
-        style="filter: url(.#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"></circle>
-
-      <div class="timer-value" xmlns="http://www.w3.org/1999/xhtml">
-        <span class="timer-value-mins">02</span><!--
-        --><span class="timer-value-dots">:</span><!--
-        --><span class="timer-value-secs">00</span>
-      </div>
-    </svg>
-
     <div class="main-wrap">
       <div class="main-timer"></div>
 
