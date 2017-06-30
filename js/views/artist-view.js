@@ -7,7 +7,6 @@ export default class ArtistView extends AbstractView {
     super();
     this._artistData = data;
     this._timeLeft = timeLeft;
-    console.log(timeLeft);
   }
 
   postRender() {
