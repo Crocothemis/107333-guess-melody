@@ -41,7 +41,7 @@ class ScreenGame {
 
   changeLevel(state, value) {
     const levelTime = Math.floor(Date.now() / 1000);
-    this.view = getQuestion((value[this.questionCount]));
+    this.view = getQuestion((value[this.questionCount]), this.timeLeft);
 
     this.questionCount++;
     this.view.onAnswer = (correct) => {
@@ -85,11 +85,11 @@ class ScreenGame {
   }
 }
 
-const getQuestion = (json) => {
+const getQuestion = (json, screenTimePoint) => {
   if (json.type === `artist`) {
-    return new ArtistView(json);
+    return new ArtistView(json, screenTimePoint);
   }
-  return new GenreView(json);
+  return new GenreView(json, screenTimePoint);
 };
 
 export default new ScreenGame();

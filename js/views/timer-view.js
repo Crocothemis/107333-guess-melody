@@ -1,10 +1,10 @@
 import AbstractView from "./abstract-view.js";
-// import {redrawCircle, addLeadingZero, redrawTimer} from "../timer";
 
 export default class TimerView extends AbstractView {
-  constructor() {
+  constructor(timeLeft) {
     super();
     this.timeTotal = 120;
+    this.timeLeft = timeLeft;
   }
 
   get template() {
@@ -34,10 +34,6 @@ export default class TimerView extends AbstractView {
 
     if (!this.circle) {
       this.circle = this.element.querySelector(`.timer-line`);
-    }
-
-    if (!this.timeLeft) {
-      this.timeLeft = 120;
     }
 
     const addLeadingZero = (val) => val < 10 ? `0${val}` : val;

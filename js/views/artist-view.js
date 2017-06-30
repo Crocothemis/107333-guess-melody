@@ -3,13 +3,15 @@ import TimerView from '../views/timer-view';
 import {initializePlayer} from '../player';
 
 export default class ArtistView extends AbstractView {
-  constructor(data) {
+  constructor(data, timeLeft) {
     super();
     this._artistData = data;
+    this._timeLeft = timeLeft;
+    console.log(timeLeft);
   }
 
   postRender() {
-    this._timer = new TimerView();
+    this._timer = new TimerView(this._timeLeft);
     this.element.querySelector(`.main--level`).insertBefore(this._timer.element, this.element.querySelector(`.main-wrap`));
   }
 
