@@ -32,21 +32,22 @@ class Application {
       Model.getData()
         .then((value) => {
           this.data = value;
-          this.routes[route].init(this.data);})
+          this.routes[route].init(this.data);
+        })
         .catch(function (e) {});
     } else {
       this.routes[route].init(this.data);
     }
-    
+
   }
 
   init() {
-  Model.getData()
-    .then((value) => {
-      this.data = value;
-      this.changeController(getControllerFromHash(location.hash));
+    Model.getData()
+      .then((value) => {
+        this.data = value;
+        this.changeController(getControllerFromHash(location.hash));
       })
-    .catch(function (e) {});
+      .catch(function (e) {});
   }
 
   showWelcome() {
