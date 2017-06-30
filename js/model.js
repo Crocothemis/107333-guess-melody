@@ -12,8 +12,8 @@ class Model {
   }
 
   getStat() {
-    return fetch(statsUrl).
-      then((resp) => resp.json())
+    return fetch(statsUrl)
+      .then((resp) => resp.json())
       .catch((e)=> window.console.log(e));
   }
 
