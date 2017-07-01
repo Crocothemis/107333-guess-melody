@@ -3,10 +3,8 @@ import ArtistView from '../views/artist-view';
 import showScreen from "../show-screen";
 import {countAnswer} from '../helpers/count-answer';
 import {statSort, getLowerResultPlayers} from '../helpers/stats';
-import formatTime from "../time-format";
 import Application from "../application.js";
 import Model from '../model';
-import {initCountdown} from "../timer";
 
 const initialState = Object.freeze({
   lives: 3,
@@ -25,8 +23,6 @@ class ScreenGame {
   init(data) {
     this.questionCount = 0;
     this.startGame(120);
-    initCountdown();
-    formatTime();
     this.changeLevel(initialState, data);
   }
 
