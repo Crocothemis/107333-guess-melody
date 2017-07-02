@@ -53,7 +53,7 @@ export default class ArtistView extends AbstractView {
     playBtn.addEventListener(`click`, (e) => {
       const answer = e.target.closest(`.main-answer-wrapper`);
       if (answer) {
-        let isCorrect = (answer.dataset.correct === `true`);
+        const isCorrect = (answer.dataset.correct === `true`);
         this.onAnswer(isCorrect);
       }
     });

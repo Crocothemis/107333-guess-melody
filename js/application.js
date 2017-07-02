@@ -79,7 +79,7 @@ class Application {
   decodeParams(str) {
     let obj = {};
     str.split(`&`).forEach(function (part) {
-      let item = part.split(`=`);
+      const item = part.split(`=`);
       obj[item[0]] = decodeURIComponent(item[1]);
     });
     return obj;
