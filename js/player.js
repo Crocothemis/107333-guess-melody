@@ -1,6 +1,5 @@
-import animationInit from './animate';
+import animationModule from './animate';
 
-animationInit();
 
 const updateState = (element, player) => {
   element.querySelector(`.player-status`).style.width =
@@ -14,8 +13,8 @@ const syncState = (player, element) => {
 const switchState = (state, player, element) => {
   if (player.paused) {
     player.play();
-    state.stopAnimation = window.animation.animate(
-        window.animation.getAnimation(player.currentTime, 1000, player.duration),
+    state.stopAnimation = animationModule.animate(
+        animationModule.getAnimation(player.currentTime, 1000, player.duration),
         (animation) => updateState(element, player));
   } else {
     player.pause();

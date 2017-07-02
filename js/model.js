@@ -5,10 +5,14 @@ class Model {
   constructor() {
   }
 
-  getData() {
-    return fetch(questionsUrl).
-      then((resp) => resp.json())
-      .catch((e)=> window.console.log(e));
+  async loadData() {
+    const response = await fetch(questionsUrl);
+    return response.json();
+  }
+
+  async getData() {
+    const response = await fetch(questionsUrl);
+    return response.json();
   }
 
   getStat() {
@@ -28,7 +32,6 @@ class Model {
 
     return fetch(statsUrl, requestSettings);
   }
-
 }
 
 export default new Model();

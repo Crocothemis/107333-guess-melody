@@ -1,7 +1,11 @@
+import 'babel-polyfill';
+import 'whatwg-fetch';
+
 import screenWelcome from "./screens/screen-welcome";
 import screenGame from './screens/screen-game';
 import screenResult from './screens/screen-result';
 import Model from './model';
+import PreloadImages from './preload';
 
 const ControllerID = {
   WELCOME: ``,
@@ -23,22 +27,21 @@ class Application {
     window.onhashchange = () => {
       this.changeController(getControllerFromHash(location.hash));
     };
+
+    this.changeController().catch(window.console.error);
   }
 
-  changeController(route = `result`) {
+  async changeController(route = ``) {
     if (route === `result`) {
       this.routes[route].init(this.decodeParams(location.hash.replace(`#`, ``).split(`?`)[1]));
     } else if (route === ``) {
-      Model.getData()
-        .then((value) => {
-          this.data = value;
-          this.routes[route].init(this.data);
-        })
-        .catch(function (e) {});
+      this.routes[route].init();
+      this.data = await Model.loadData();
+      await PreloadImages.init(this.data);
+      this.routes[route].addPlayBtn();
     } else {
       this.routes[route].init(this.data);
     }
-
   }
 
   init() {
@@ -76,7 +79,7 @@ class Application {
   decodeParams(str) {
     let obj = {};
     str.split(`&`).forEach(function (part) {
-      let item = part.split(`=`);
+      const item = part.split(`=`);
       obj[item[0]] = decodeURIComponent(item[1]);
     });
     return obj;

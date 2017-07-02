@@ -1,10 +1,21 @@
 import AbstractView from "./abstract-view.js";
+import TimerView from '../views/timer-view';
 import {initializePlayer} from '../player';
 
 export default class GenreView extends AbstractView {
-  constructor(data) {
+  constructor(data, timeLeft) {
     super();
     this._genreData = data;
+    this._timeLeft = timeLeft;
+  }
+
+  postRender() {
+    this._timer = new TimerView(this._timeLeft);
+    this.element.querySelector(`.main--level`).insertBefore(this._timer.element, this.element.querySelector(`.main-wrap`));
+  }
+
+  updateTimeLeft(timeLeft) {
+    this._timer.updateTimeLeft(timeLeft);
   }
 
   get template() {
@@ -12,21 +23,27 @@ export default class GenreView extends AbstractView {
     const songsTemplate = (d) =>
       d.answers
         .map((song, idx) => `
-      <div class="genre-answer">
-        <div class="player-wrapper"></div>
-        <input type="checkbox" data-genre="${song.genre}" name="answer" value="answer-${idx}" id="a-${idx}">
-        <label class="genre-answer-check" for="a-${idx}"></label>
-      </div>`
-        )
+          <div class="genre-answer">
+            <div class="player-wrapper"></div>
+            <input type="checkbox" data-genre="${song.genre}" name="answer" value="answer-${idx}" id="a-${idx}">
+            <label class="genre-answer-check" for="a-${idx}"></label>
+          </div>
+        `)
         .join(``);
 
-    return `<section class="main main--level main--level-genre" id="level-genre">
-    <h2 class="title">${this._genreData.question}</h2>
-    <form class="genre">
-    ${songsTemplate(this._genreData)}
-      <button class="genre-answer-send" type="submit" disabled="disabled">Ответить</button>
-    </form>
-  </section>`.trim();
+    return `
+      <section class="main main--level main--level-genre" id="level-genre">
+        <div class="main-wrap">
+          <div class="main-timer"></div>
+          
+          <h2 class="title">${this._genreData.question}</h2>
+          <form class="genre">
+          ${songsTemplate(this._genreData)}
+            <button class="genre-answer-send" type="submit" disabled="disabled">Ответить</button>
+          </form>
+        </div>
+      </section>
+    `.trim();
   }
 
   bind() {

@@ -9,13 +9,16 @@ export default class AbstractView {
     return getElFromTempl(this.template);
   }
 
-  bind() {
+  postRender() {
+  }
 
+  bind() {
   }
 
   get element() {
     if (!this._element) {
       this._element = this.render();
+      this.postRender();
       this.bind();
     }
     return this._element;

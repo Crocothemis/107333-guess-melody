@@ -22,6 +22,7 @@ class ScreenGame {
 
   init(data) {
     this.questionCount = 0;
+    this.startGame(120);
     this.changeLevel(initialState, data);
   }
 
@@ -36,8 +37,8 @@ class ScreenGame {
 
   changeLevel(state, value) {
     const levelTime = Math.floor(Date.now() / 1000);
+    this.view = getQuestion((value[this.questionCount]), this.timeLeft);
 
-    this.view = getQuestion((value[this.questionCount]));
     this.questionCount++;
     this.view.onAnswer = (correct) => {
       const time = Math.floor(Date.now() / 1000) - levelTime;
@@ -46,11 +47,12 @@ class ScreenGame {
       if (!nextState.gameStatus) {
         this.changeLevel(nextState, value);
       } else {
-
         const statData = JSON.stringify({
           time: nextState.totalTime,
           points: nextState.points
         });
+
+        this.timerStop();
 
         Model.sendData(statData)
           .then(() => Model.getStat())
@@ -61,14 +63,29 @@ class ScreenGame {
       }
     };
   }
+
+  startGame(timeLeft) {
+    this.timeLeft = timeLeft;
+    this.timerUpdate = setInterval(() => {
+      this.timeLeft--;
+      if (this.timeLeft === 0) {
+        Application.showResult({gameStatus: `fail`});
+        this.timerStop();
+      }
+      this.view.updateTimeLeft(this.timeLeft);
+    }, 1000);
+  }
+
+  timerStop() {
+    clearInterval(this.timerUpdate);
+  }
 }
 
-const getQuestion = (json) => {
-
+const getQuestion = (json, screenTimePoint) => {
   if (json.type === `artist`) {
-    return new ArtistView(json);
+    return new ArtistView(json, screenTimePoint);
   }
-  return new GenreView(json);
+  return new GenreView(json, screenTimePoint);
 };
 
 export default new ScreenGame();
