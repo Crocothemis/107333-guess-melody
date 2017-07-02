@@ -1,24 +1,24 @@
 class PreloadImages {
 
-  loadImg(url) {
+  async loadImg(url) {
     if (url === ``) {
       return Promise.resolve();
     }
 
-    return new Promise((resolve) => {
+    return await new Promise((resolve) => {
       const image = new Image();
       image.addEventListener(`load`, function() {
-        resolve();
+        resolve(true);
       }, false);
       image.src = url;
     });
   }
 
-  startPreloadImages(urls) {
-    return Promise.all(urls.map(this.loadImg));
+  async startPreloadImages(urls) {
+    return await Promise.all(urls.map(this.loadImg));
   }
 
-  init(value) {
+  async init(value) {
     let images = [];
     value.forEach((elem, i) => {
       if (elem.type === `artist`) {
@@ -29,9 +29,8 @@ class PreloadImages {
         });
       }
     });
-    return this.startPreloadImages(images);
+    return await this.startPreloadImages(images);
   }
-
 }
 
 export default new PreloadImages();

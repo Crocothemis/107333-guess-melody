@@ -28,26 +28,20 @@ class Application {
       this.changeController(getControllerFromHash(location.hash));
     };
 
+    this.changeController().catch(window.console.error);
   }
 
-  changeController(route = `result`) {
+  async changeController(route = ``) {
     if (route === `result`) {
       this.routes[route].init(this.decodeParams(location.hash.replace(`#`, ``).split(`?`)[1]));
     } else if (route === ``) {
       this.routes[route].init();
-      Model.getData()
-        .then((value) => {
-          this.data = value;
-          return PreloadImages.init(value);
-        })
-        .then(() => {
-          this.routes[route].addPlayBtn();
-        })
-        .catch(function (e) {});
+      this.data = await Model.loadData();
+      await PreloadImages.init(this.data);
+      this.routes[route].addPlayBtn();
     } else {
       this.routes[route].init(this.data);
     }
-
   }
 
   init() {
