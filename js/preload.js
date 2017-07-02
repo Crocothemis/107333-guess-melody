@@ -15,11 +15,11 @@ class PreloadImages {
   }
 
   async startPreloadImages(urls) {
-    return await Promise.all(urls.map(this.loadImg));
+    return Promise.all(urls.map(this.loadImg));
   }
 
   async init(value) {
-    let images = [];
+    const images = [];
     value.forEach((elem, i) => {
       if (elem.type === `artist`) {
         elem.answers.forEach((answer, j) => {

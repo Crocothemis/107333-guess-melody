@@ -7,14 +7,10 @@ class Model {
 
   async loadData() {
     const response = await fetch(questionsUrl);
-    // console.log(response.json());
     return response.json();
   }
 
   async getData() {
-    // return fetch(questionsUrl)
-    //   .then((resp) => resp.json())
-    //   .catch((e)=> window.console.log(e));
     const response = await fetch(questionsUrl);
     return response.json();
   }
