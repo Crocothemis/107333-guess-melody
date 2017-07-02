@@ -3,15 +3,26 @@ import Application from '../application';
 import showScreen from "../show-screen";
 
 class ScreenWelcome {
+  get view() {
+    return this._view;
+  }
+
+  set view(view) {
+    this._view = view;
+  }
 
   init() {
-    const view = new WelcomeView();
+    this.view = new WelcomeView();
 
-    view.onStart = () => {
+    this.view.onStart = () => {
       Application.showGame();
     };
 
-    showScreen(view.element);
+    showScreen(this.view.element);
+  }
+
+  addPlayBtn() {
+    this.view.addPlayBtn();
   }
 }
 
