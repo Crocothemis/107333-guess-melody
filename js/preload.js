@@ -5,7 +5,7 @@ class PreloadImages {
       return Promise.resolve();
     }
 
-    return await new Promise((resolve) => {
+    return new Promise((resolve) => {
       const image = new Image();
       image.addEventListener(`load`, function () {
         resolve(true);
@@ -29,7 +29,7 @@ class PreloadImages {
         });
       }
     });
-    return await this.startPreloadImages(images);
+    return this.startPreloadImages(images);
   }
 }
 
