@@ -7,7 +7,7 @@ class PreloadImages {
 
     return await new Promise((resolve) => {
       const image = new Image();
-      image.addEventListener(`load`, function() {
+      image.addEventListener(`load`, function () {
         resolve(true);
       }, false);
       image.src = url;
