@@ -20,12 +20,10 @@ class PreloadImages {
 
   async init(value) {
     const images = [];
-    value.forEach((elem, i) => {
+    value.forEach((elem) => {
       if (elem.type === `artist`) {
-        elem.answers.forEach((answer, j) => {
-          if (images.indexOf(elem.answers[j].image.url) === -1) {
-            images.push(elem.answers[j].image.url);
-          }
+        elem.answers.forEach((answer) => {
+          images.push(answer.image.url);
         });
       }
     });
