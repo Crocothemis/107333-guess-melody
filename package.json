@@ -29,7 +29,11 @@
     "gulp-postcss": "7.0.0",
     "gulp-rename": "1.2.2",
     "gulp-sass": "3.1.0",
-    "gulp-sourcemaps": "2.6.0"
+    "gulp-sourcemaps": "2.6.0",
+    "gulp-uglify": "3.0.0",
+    "rollup-plugin-babel": "2.7.1",
+    "rollup-plugin-commonjs": "8.0.2",
+    "rollup-plugin-node-resolve": "3.0.0"
   },
   "engines": {
     "node": "6.10"
@@ -41,10 +45,6 @@
   },
   "dependencies": {
     "babel-polyfill": "6.23.0",
-    "gulp-uglify": "^3.0.0",
-    "rollup-plugin-babel": "^2.7.1",
-    "rollup-plugin-commonjs": "^8.0.2",
-    "rollup-plugin-node-resolve": "^3.0.0",
     "whatwg-fetch": "2.0.3"
   }
 }
