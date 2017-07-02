@@ -22,27 +22,29 @@ export default class ArtistView extends AbstractView {
     const artistTemplate = (d) =>
       d.answers
         .map((variant, idx) => `
-      <div class="main-answer-wrapper" data-correct="${variant.isCorrect}">
-          <input class="main-answer-r" type="radio" id="answer-${idx}" name="answer" value="val-${idx}" />
-          <label class="main-answer" for="answer-${idx}">
-            <img class="main-answer-preview" src="${variant.image.url}" width="${variant.image.width}" height="${variant.image.height}">
-            ${variant.title}
-          </label>
-        </div>`
-        )
+          <div class="main-answer-wrapper" data-correct="${variant.isCorrect}">
+            <input class="main-answer-r" type="radio" id="answer-${idx}" name="answer" value="val-${idx}" />
+            <label class="main-answer" for="answer-${idx}">
+              <img class="main-answer-preview" src="${variant.image.url}" width="${variant.image.width}" height="${variant.image.height}">
+              ${variant.title}
+            </label>
+          </div>
+        `)
         .join(``);
 
-    return `<section class="main main--level main--level-artist" id="level-artist">
-    <div class="main-wrap">
-      <div class="main-timer"></div>
-
-      <h2 class="title main-title">${this._artistData.question}</h2>
-      <div class="player-wrapper"></div>
-      <form class="main-list">
-        ${artistTemplate(this._artistData)}
-      </form>
-    </div>
-  </section>`.trim();
+    return `
+      <section class="main main--level main--level-artist" id="level-artist">
+        <div class="main-wrap">
+          <div class="main-timer"></div>
+    
+          <h2 class="title main-title">${this._artistData.question}</h2>
+          <div class="player-wrapper"></div>
+          <form class="main-list">
+            ${artistTemplate(this._artistData)}
+          </form>
+        </div>
+      </section>
+    `.trim();
   }
 
   bind() {
