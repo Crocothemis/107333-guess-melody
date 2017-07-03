@@ -1,4 +1,4 @@
-import getElFromTempl from "../get-el-from-tmpl";
+import getElementFromTemplate from "../get-element-from-template";
 
 export default class AbstractView {
   get template() {
@@ -6,7 +6,7 @@ export default class AbstractView {
   }
 
   render() {
-    return getElFromTempl(this.template);
+    return getElementFromTemplate(this.template);
   }
 
   postRender() {
