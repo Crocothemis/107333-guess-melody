@@ -5,7 +5,8 @@ import screenWelcome from "./screens/screen-welcome";
 import screenGame from './screens/screen-game';
 import screenResult from './screens/screen-result';
 import Model from './model';
-import PreloadImages from './preload';
+import PreloadImages from './preload/preload-images';
+import PreloadMusic from './preload/preload-music';
 
 const ControllerID = {
   WELCOME: ``,
@@ -38,6 +39,7 @@ class Application {
       this.routes[route].init();
       this.data = await Model.loadData();
       await PreloadImages.init(this.data);
+      await PreloadMusic.init(this.data);
       this.routes[route].addPlayBtn();
     } else {
       this.routes[route].init(this.data);
